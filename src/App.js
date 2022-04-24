@@ -1,24 +1,68 @@
-import logo from './logo.svg';
-import './App.css';
+import { createContext, useState } from 'react';
+import Cart from './components/cart/cart';
+import Footer from './components/footer';
+import Header from './components/header';
+import Modal from './components/modal';
+import Navbar from './components/navbar';
 
+import './index.css';
+export const QuantityContext = createContext();
 function App() {
+  const [cartItems, setCartItems] = useState([
+    {
+      image: './Frame9.png',
+      name: 'Body Cleanser',
+      netQuantity: '250ml',
+      price: 250,
+      quantity: 2,
+    },
+    {
+      image: './Frame10.png',
+      name: 'Body Cleanser',
+      netQuantity: '250ml',
+      price: 250,
+      quantity: 1,
+    },
+    {
+      image: './Frame11.png',
+      name: 'Body Cleanser',
+      netQuantity: '250ml',
+      price: 250,
+      quantity: 1,
+    },
+  ]);
+  const [showModal, setShowModal] = useState();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <>
+      {showModal && (
+        <Modal setShowModal={(value) => setShowModal(value)}>
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className='tw-bg-[#007E3D] tw-rounded-lg tw-flex tw-items-center tw-justify-center tw-h-2/4 tw-w-4/5 xl:tw-w-1/2 tw-py-4  tw-px-5 tw-text-white tw-text-2xl tw-font-normal'
+          >
+            Success!
+          </div>
+        </Modal>
+      )}
+      <div
+        className={`${
+          showModal && 'tw-fixed tw-inset-0'
+        } tw-min-h-screen tw-min-w-screen tw-flex tw-flex-col `}
+      >
+        <QuantityContext.Provider
+          value={{
+            cartItems,
+            setCartItems,
+            setShowModal,
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Header />
+          <Navbar />
+          <Cart />
+          <Footer />
+        </QuantityContext.Provider>
+      </div>
+    </>
   );
 }
 
