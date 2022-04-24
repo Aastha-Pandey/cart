@@ -13,7 +13,7 @@ const CartTable = () => {
           borderCollapse: 'separate',
           borderSpacing: '0.5rem',
         }}
-        className='table-fixed xl:tw-w-3/4 '
+        className='table-fixed  xl:tw-w-3/4 '
       >
         <thead>
           <tr className='tw-h-10'>
