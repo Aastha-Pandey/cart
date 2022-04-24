@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import Cart from './components/cart/cart';
 import Footer from './components/footer';
 import Header from './components/header';
@@ -32,6 +32,9 @@ function App() {
     },
   ]);
   const [showModal, setShowModal] = useState();
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
   return (
     <>
       {showModal && (
